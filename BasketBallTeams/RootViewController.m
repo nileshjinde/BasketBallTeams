@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 
 @implementation RootViewController
-
+@synthesize teams;
 
 - (void)viewDidLoad
 {
@@ -36,6 +36,24 @@
 	[super viewDidDisappear:animated];
 }
 
+
+-(id)initWithCoder:(NSCoder *)coder{
+    if(self=[super initWithCoder:coder])
+    {
+        self.teams = [NSMutableArray 
+                       arrayWithObjects:@"India",
+                                      @"England",
+                                     @"Aus",
+                                     @"USA",
+                                    nil];
+    }
+    return self;
+    
+}
+
+
+
+
 /*
  // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -52,19 +70,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [teams count];
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Team";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     }
-
+    cell.text=[teams objectAtIndex:indexPath.row];
     // Configure the cell.
     return cell;
 }
@@ -139,6 +157,7 @@
 
 - (void)dealloc
 {
+    [teams release];
     [super dealloc];
 }
 

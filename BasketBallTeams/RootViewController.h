@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RootViewController : UITableViewController
+{
+    NSMutableArray *teams;   
+}
 
+@property(nonatomic,retain)NSMutableArray *teams;
 @end
+
